@@ -1,1 +1,222 @@
+AS 2a Miles per Gallon
+
+ 
+
+#include<iostream>
+
+using namespace std;
+
+int main()          
+
+{
+
+    double size,travel, mpg ;
+
+    cout<<"Enter the full tank size: \n";
+
+    cin>> size;
+
+    cout<<"Enter the miles a full tank can travel:\n";
+
+    cin>> travel;
+
+    mpg = (float)travel/size;
+
+    cout<<"If a car holds "<<size<<" gallons of gasoline\n";
+
+    cout<<"and can travel "<<travel<<" miles before refueling,\n";
+
+    cout<<"then it will get about "<<mpg<<" MPG."<<endl;
+
+    return 0;
+
+}
+
+TEST RUN
+
+Enter the full tank size:                                                                   
+
+19                                                                                          
+
+Enter the miles a full tank can travel:                                                     
+
+345                                                                                         
+
+If a car holds 19 gallons of gasoline                                                       
+
+and can travel 345 miles before refueling,                                                  
+
+then it will get about 18.1579 MPG.                                                         
+
+                                                                                            
+
+                                                                                            
+
+...Program finished with exit code 0                                                        
+
+Press ENTER to exit console.                                                                
+
+                                                                                            
+
+ AS 2b Stadium Seating     
+
+ 
+
+#include<iostream>
+
+#include<iomanip>
+
+using namespace std;
+
+int main()
+
+{
+
+ int a = 15, b = 12, c = 9, tic1, tic2, tic3;
+
+ double total;
+
+cout<<"Enter the number of Class A tickets sold:\n";
+
+cin>> tic1;
+
+cout<<"Enter the number of Class B tickets sold:\n";
+
+cin>> tic2;
+
+cout<<"Enter the number of Class C tickets sold:\n";
+
+cin>> tic3;
+
+total = ((a*tic1) + (b*tic2) + (c*tic3));
+
+cout<<setprecision(5)<<showpoint<<"Total income from sale of tickets is $"<<total<<endl;
+
+return 0;
+
+}                                  
+
+ 
+
+TEST RUN
+
+ 
+
+Enter the number of Class A tickets sold:
+
+2
+
+Enter the number of Class B tickets sold:
+
+3
+
+Enter the number of Class C tickets sold:
+
+4
+
+Total income from sale of tickets is $102.00
+
+ 
+
+ 
+
+ 
+
+AS 2c Celsius to Fahrenheit
+
+#include<iostream>
+using namespace std;
+int main()
+{
+double celsius,fahrenheit;
+cout<<"Enter the temperature in Celsius:\n";
+cin>> celsius;
+fahrenheit = (double)9/5 * celsius + 32;
+cout<<fahrenheit<<" degrees Fahrenheit."<<endl;
+return 0;
+}
+
+TEST RUN
+
+Enter the temperature in Celsius:                                             
+
+27                                                                            
+
+80.6 degrees Fahrenheit.                                                      
+
+                                                                              
+
+                                                                              
+
+...Program finished with exit code 0                                          
+
+Press ENTER to exit console. 
+
+ 
+
+AS 2d Math Tutor
+
+ 
+
+#include<iostream>
+
+#include<cstdlib>
+
+#include<ctime>
+
+#include<iomanip>
+
+using namespace std;
+
+int main()
+
+{
+
+    int a, b, result;
+
+    srand(time(0));
+
+    a = rand()%(1000);
+
+    b = rand()%(1000);
+
+    cout<<setw(4)<<a<<endl;
+
+    cout<<"+";
+
+    cout<<setw(3)<<b<<endl;
+
+    cout<<"Press Enter to see the answer . . .\n";
+
+    cin.ignore();
+
+    result = a + b;
+
+    cout<<result<<endl;
+
+    return 0;
+
+}
+
+TEST RUN
+
+ 146                                                                          
+
++715                                                                          
+
+Press Enter to see the answer . . .                                           
+
+                                                                              
+
+861                                                                           
+
+                                                                              
+
+                                                                              
+
+...Program finished with exit code 0                                          
+
+Press ENTER to exit console.  
+
+ 
 
