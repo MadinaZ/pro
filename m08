@@ -1,0 +1,333 @@
+Assignment 9a Movie Data
+
+#include<iostream>
+using namespace std;
+struct MovieData
+{
+string title, director;
+int year,min ; 
+};
+int main()
+{
+MovieData info = {"War of the Worlds","Byron Haskin", 1953,88};
+cout<<"Title : "<< info.title<<endl;
+cout<<"Director :"<<info.director<<endl;
+cout<<"Released : "<<info.year<<endl;
+cout<<"Running Time: "<<info.min<<" minutes"<<endl;
+MovieData info2 = {"War of the Worlds","Stephen Spielberg", 2005,118};
+cout<<"\n\n";
+cout<<"Title : "<< info2.title<<endl;
+cout<<"Director :"<<info2.director<<endl;
+cout<<"Released : "<<info2.year<<endl;
+cout<<"Running Time: "<<info2.min<<" minutes"<<endl;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/.c9/pro3.cpp
+Title : War of the Worlds
+Director :Byron Haskin
+Released : 1953
+Running Time: 88 minutes
+
+
+Title : War of the Worlds
+Director :Stephen Spielberg
+Released : 2005
+Running Time: 118 minutes
+
+
+Process exited with code: 0
+
+ 
+
+Assignment 9b Movie Profit
+
+#include<iostream>
+using namespace std;
+struct MovieData
+{
+string title, director;
+int year,min ; 
+double cost,rev, profit;
+};
+int main()
+{
+MovieData info = {"War of the Worlds","Byron Haskin", 1953,88};
+cout<<"Title : "<< info.title<<endl;
+cout<<"Director :"<<info.director<<endl;
+cout<<"Released : "<<info.year<<endl;
+cout<<"Running Time: "<<info.min<<" minutes"<<endl;
+cout<<"Production cost: ";
+cin>>info.cost;
+cout<<"First year profit: ";
+cin>>info.rev;
+cout<<"First year profit: ";
+info.profit = info.rev - info.cost;
+cout<<info.profit<<endl;
+
+MovieData info2 = {"War of the Worlds","Stephen Spielberg", 2005,118};
+cout<<"\n\n";
+cout<<"Title : "<< info2.title<<endl;
+cout<<"Director :"<<info2.director<<endl;
+cout<<"Released : "<<info2.year<<endl;
+cout<<"Running Time: "<<info2.min<<" minutes"<<endl;
+cout<<"Production cost: ";
+cin>>info2.cost;
+cout<<"First year profit: ";
+cin>>info2.rev;
+cout<<"First year profit: ";
+info2.profit = info2.rev - info2.cost;
+cout<<info2.profit<<endl;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/as1.cpp
+Title : War of the Worlds
+Director :Byron Haskin
+Released : 1953
+Running Time: 88 minutes
+Production cost: 160000
+First year profit: 250000
+First year profit: 90000
+
+
+Title : War of the Worlds
+Director :Stephen Spielberg
+Released : 2005
+Running Time: 118 minutes
+Production cost: 300000
+First year profit: 500000
+First year profit: 200000
+
+
+Process exited with code: 0
+
+ 
+
+Assignment 9c Weather Statistics
+
+#include<iostream>
+using namespace std;
+struct rain
+{
+double totalpm, total,avrain,avtemp;
+int high, low;
+};
+int l ,h ;
+int main()
+{
+int num1, num2;
+rain r[13];
+rain t;
+int highest = 13;
+int lowest = 13;
+for(int i = 1; i<= 12;i++)
+{
+cout<<"Month "<<i<<endl;
+cout<<"Total rainfall: ";
+cin>>r[i].totalpm;
+cout<<"High Temperature: ";
+cin>>r[i].high;
+cout<<"Low Temperature: ";
+cin>>r[i].low;
+t.total += r[i].totalpm;
+t.avrain += r[i].totalpm/12;
+t.avtemp += double(r[i].high + r[i].low) /24;
+if(r[i].high > highest)
+{
+highest = r[i].high;
+h++;
+}
+if(r[i].low < lowest )
+{
+lowest = r[i].low;
+l++;
+}
+}
+cout<<"Total Rainfall: "<<t.total<<endl;
+cout<<"Average Monthly Rain: "<<t.avrain<<endl;
+cout<<"Average Monthly Temperature: "<<t.avtemp<<endl;
+cout<<"Highest Temperature: "<<highest<<" Month "<<h<<endl;
+cout<<"Lowest Temperature: "<<lowest<< " Month "<<l<<endl;
+
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/ex1.cpp
+Month 1
+Total rainfall: 1.1
+High Temperature: 21 
+Low Temperature: 9
+Month 2
+Total rainfall: 1.2
+High Temperature: 22
+Low Temperature: 1
+Month 3
+Total rainfall: 1.3
+High Temperature: 23
+Low Temperature: 2
+Month 4
+Total rainfall: 1.4
+High Temperature: 24
+Low Temperature: 3
+Month 5
+Total rainfall: 1.5
+High Temperature: 25
+Low Temperature: 5
+Month 6
+Total rainfall: 1.6
+High Temperature: 26
+Low Temperature: 6
+Month 7
+Total rainfall: 1.7
+High Temperature: 27
+Low Temperature: 7
+Month 8
+Total rainfall: 1.8
+High Temperature: 28
+Low Temperature: 8
+Month 9
+Total rainfall: 1.9
+High Temperature: 29
+Low Temperature: 11
+Month 10
+Total rainfall: 2.1
+High Temperature: 31 
+Low Temperature: 12
+Month 11
+Total rainfall: 2.2
+Low Temperature: 13
+Month 12
+Total rainfall: 2.3
+High Temperature: 33
+Low Temperature: 14
+Total Rainfall: 20.1
+Average Monthly Rain: 1.675
+Average Monthly Temperature: 17.1667
+Highest Temperature: 33 Month 12
+Lowest Temperature: 1 Month 2
+
+
+Process exited with code: 0
+
+Assignment 9d Weather Statistics 2
+
+#include<iostream>
+#include<string>
+using namespace std;
+struct rain
+{
+double totalpm, total,avrain,avtemp;
+int high, low;
+};
+
+int l,h;
+int main()
+{
+string x,y;
+
+enum months { JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY,
+AUGUST, SEPTEMBER ,OCTOBER ,NOVEMBER, DECEMBER };
+
+string monthName[13]= {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
+"JULY","AUGUST", "SEPTEMBER" ,"OCTOBER" ,"NOVEMBER", "DECEMBER" };
+
+rain r[13];
+rain t;
+int highest = 13;
+int lowest = 13;
+for(int i = JANUARY; i<= DECEMBER; i++)
+{
+cout<<monthName[i]<<endl;
+cout<<"Total rainfall: ";
+cin>>r[i].totalpm;
+cout<<"High Temperature: ";
+cin>>r[i].high;
+cout<<"Low Temperature: ";
+cin>>r[i].low;
+t.total += r[i].totalpm;
+t.avrain += r[i].totalpm/12;
+t.avtemp += double(r[i].high + r[i].low) /24;
+if(r[i].high>highest)
+{
+highest = r[i].high;
+h++;
+}
+if(r[i].low < lowest )
+{
+lowest = r[i].low;
+l++;
+}
+}
+cout<<"Total Rainfall: "<<t.total<<endl;
+cout<<"Average Monthly Rain: "<<t.avrain<<endl;
+cout<<"Average Monthly Temperature: "<<t.avtemp<<endl;
+cout<<"Highest Temperature: "<<highest<<" Month "<<monthName[h-1]<<endl;
+cout<<"Lowest Temperature: "<<lowest<<" Month "<<monthName[l-1]<<endl;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/as9d.cpp
+JANUARY
+Total rainfall: 1.1
+High Temperature: 21
+Low Temperature: 9
+FEBRUARY
+Total rainfall: 1.2
+High Temperature: 22
+Low Temperature: 1
+MARCH
+Total rainfall: 1.3
+High Temperature: 23
+Low Temperature: 2
+APRIL
+Total rainfall: 1.4
+High Temperature: 24
+Low Temperature: 3
+MAY
+Total rainfall: 1.5
+High Temperature: 25
+Low Temperature: 4
+JUNE
+Total rainfall: 1.6
+High Temperature: 26
+Low Temperature: 5
+JULY
+Total rainfall: 1.7
+High Temperature: 27
+Low Temperature: 6
+AUGUST
+Total rainfall: 1.8
+High Temperature: 28
+Low Temperature: 7
+SEPTEMBER
+Total rainfall: 1.9
+High Temperature: 29
+Low Temperature: 9
+OCTOBER
+Total rainfall: 2.1
+High Temperature: 31
+Low Temperature: 11
+NOVEMBER
+Total rainfall: 2.2
+Low Temperature: 12
+DECEMBER
+Total rainfall: 2.3
+High Temperature: 33
+Low Temperature: 13
+Total Rainfall: 20.1
+Average Monthly Rain: 1.675
+Average Monthly Temperature: 16.7917
+Highest Temperature: 33 Month DECEMBER
+Lowest Temperature: 1 Month FEBRUARY
+
+
+Process exited with code: 0
+
+ 
