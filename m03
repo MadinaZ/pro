@@ -1,0 +1,308 @@
+AS 4a Characters for the ASCII Codes
+
+#include <iostream>
+using namespace std;
+
+int main()
+{ 
+
+for (char c = 1; c<127;c++)
+{ cout<<c;
+if((c%16)==0)
+cout<<endl;
+}
+
+return 0;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/4a.cpp
+
+ 
+
+ 
+
+
+123456789:;<=>?@
+ABCDEFGHIJKLMNOP
+QRSTUVWXYZ[\]^_`
+abcdefghijklmnop
+qrstuvwxyz{|}~
+
+Process exited with code: 0
+
+AS 4b Math Tutor
+
+#include<iostream>
+#include<iomanip>
+#include<string>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+int main()
+{
+    int choice,a1,b1, result1,result2,result3,answer;
+    double result4;
+    
+    do
+    {
+        cout<<"Math Tutor Menu"<<endl;
+        cout<<"-----------------------\n";
+        cout<<"1. Addition problem\n";
+        cout<<"2. Subtraction problem\n";
+        cout<<"3. Multiplication problem\n";
+        cout<<"4. Division problem\n";
+        cout<<"5. Quit this program\n";
+        cout<<"-----------------------\n";
+        cout<<"Enter your choice (1-5):";
+        cin>> choice;
+        
+        srand(time(0));
+        if(choice ==1)
+        {
+            a1 = rand()%(1000);
+            b1 = rand()%(1000);
+            result1 = a1+ b1;
+            cout<<setw(4)<<a1<<endl;
+            cout<<"+";
+            cout<<setw(3)<<b1<<endl;
+            cout<<"----\n";
+            cin>>answer;
+            if(answer == result1)
+                cout<<"Congratulations it is the correct answer!\n";
+            else
+                cout<<"Sorry, the correct answer is "<<result1<<endl;
+        }
+        
+        if( choice == 2)
+        {
+            a1 = rand()%(1000);
+            b1 = rand()%(1000);
+            result2 = a1 - b1;
+            cout<<setw(4)<<a1<<endl;
+            cout<<"-";
+            cout<<setw(3)<<b1<<endl;
+            cout<<"----\n";
+            cin>>answer;
+            
+            if(answer == result2)
+                cout<<"Congratulations it is the correct answer!\n";
+            else
+                cout<<"Sorry, the correct answer is "<<result2<<endl;}
+        
+        if( choice == 3)
+        {
+            a1 = rand()%(100);
+            b1 = rand()%(100);
+            result3 = a1 * b1;
+            cout<<setw(4)<<a1<<endl;
+            cout<<"*";
+            cout<<setw(3)<<b1<<endl;
+            cout<<"----\n";
+            cin>>answer;
+            
+            if(answer == result3)
+                cout<<"Congratulations it is the correct answer!\n";
+            else
+                cout<<"Sorry, the correct answer is "<<result3<<endl;}
+        
+        if( choice == 4)
+        {
+            a1 = rand()%(1000);
+            b1 = rand()%(1000);
+            result4 = (double)a1 / b1;
+            cout<<setw(4)<<a1<<endl;
+            cout<<"/";
+            cout<<setw(3)<<b1<<endl;
+            cout<<"----\n";
+            cin>>answer;
+            
+            if(answer == result4)
+                cout<<"Congratulations it is the correct answer!\n";
+            else
+                cout<<"Sorry, the correct answer is "<<result4<<endl;}
+    }
+    while(choice < 5);
+    if (choice == 5)
+        cout<<"Thank you for using Math Tutor.\n";
+    return 0;
+}
+TEST RUN
+Math Tutor Menu
+-----------------------
+1. Addition problem
+2. Subtraction problem
+3. Multiplication problem
+4. Division problem
+5. Quit this program
+-----------------------
+Enter your choice (1-5):1
+646
++990
+----
+1636
+Congratulations it is the correct answer!
+Math Tutor Menu
+-----------------------
+1. Addition problem
+2. Subtraction problem
+3. Multiplication problem
+4. Division problem
+5. Quit this program
+-----------------------
+Enter your choice (1-5):2
+849
+-711
+----
+138
+Congratulations it is the correct answer!
+Math Tutor Menu
+-----------------------
+1. Addition problem
+2. Subtraction problem
+3. Multiplication problem
+4. Division problem
+5. Quit this program
+-----------------------
+Enter your choice (1-5):3
+97
+* 43
+----
+2345
+Sorry, the correct answer is 4171
+Math Tutor Menu
+-----------------------
+1. Addition problem
+2. Subtraction problem
+3. Multiplication problem
+4. Division problem
+5. Quit this program
+-----------------------
+Enter your choice (1-5):4
+51
+/526
+0
+Sorry, the correct answer is 0.0969582
+Math Tutor Menu
+-----------------------
+1. Addition problem
+2. Subtraction problem
+3. Multiplication problem
+4. Division problem
+5. Quit this program
+-----------------------
+Enter your choice (1-5):5
+Thank you for using Math Tutor.
+
+
+Process exited with code: 0
+
+ 
+
+AS 4c Pattern Displays
+
+#include<iostream>
+using namespace std;
+int main()
+{
+
+cout<<"Pattern A"<<endl;
+for(int r = 1;r<=10;r++)
+{
+for(int c = 0;c<r;c++)
+{
+cout<<"+";
+}
+cout<<endl;
+}
+
+cout<<" "<<endl; 
+cout<<"Pattern B"<<endl;
+
+for(int r = 10;r>0;r--)
+{
+for(int c = 0;c<r;c++)
+{
+cout<<"+";
+}
+cout<<endl;
+}
+
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/4c.cpp
+Pattern A
++
+++
++++
+++++
++++++
+++++++
++++++++
+++++++++
++++++++++
+++++++++++
+
+Pattern B
+++++++++++
++++++++++
+++++++++
++++++++
+++++++
++++++
+++++
++++
+++
++
+
+
+Process exited with code: 0
+
+AS 4d Distance Traveled
+
+#include<iostream>
+using namespace std;
+int main()
+{
+int speed,hours,num;
+num = 1;
+cout<<"What is the speed of the vehicle in mph?\n";
+cin>>speed;
+cout<<"How many hours has it traveled?\n";
+cin>>hours;
+cout<<"Hour Distance Traveled\n";
+cout<<"---------------------------\n";
+do
+{
+cout << num << "\t\t" << (speed * num) << endl;
+num++;
+}
+while(num <= hours);
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/4d.cpp
+What is the speed of the vehicle in mph?
+80
+How many hours has it traveled?
+5
+Hour Distance Traveled
+---------------------------
+1                    80
+2                    160
+3                    240
+4                    320
+5                    400
+
+
+Process exited with code: 0
