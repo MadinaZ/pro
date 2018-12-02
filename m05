@@ -1,3 +1,465 @@
+AS6a Largest/Smallest Array Values
+
+#include<iostream>
+
+using namespace std;
+
+ 
+
+int main()
+
+{
+
+    int count;
+
+    int array[10];
+
+    int sizeofarray = 10;
+
+    cout<<"This program will ask you to\n";
+
+    cout<<"enter ten values, then it will\n";
+
+    cout<"determine the largest and smallest\n";
+
+    cout<<"of the values you entered.\n";
+
+    for(int &num: array)
+
+    {
+
+        cout<<"Enter an integer value:\n";
+
+        cin>> num;
+
+    }
+
+ 
+
+    int highest;
+
+    highest = array[0];
+
+    for(int count = 1; count < sizeofarray; count++)
+
+    {
+
+        if(array[count]> highest)
+
+        highest = array[count];
+
+    }
+
+    cout<<"The largest value entered is "<<highest<<endl;
+
+    int lowest;
+
+    lowest = array [0];
+
+    for(int count = 1; count < sizeofarray; count++)
+
+    {
+
+        if(array[count]< lowest)
+
+        lowest = array[count];
+
+    }
+
+     cout<<"The lowest value entered is "<<lowest<<endl;
+
+   
+
+}
+
+ 
+
+TEST RUN
+
+ 
+
+Running /home/ec2-user/environment/assign-1.cpp
+
+This program will ask you to
+
+enter ten values, then it will
+
+of the values you entered.
+
+Enter an integer value:
+
+23
+
+Enter an integer value:
+
+27
+
+Enter an integer value:
+
+29
+
+Enter an integer value:
+
+32
+
+Enter an integer value:
+
+19
+
+Enter an integer value:
+
+41
+
+Enter an integer value:
+
+37
+
+Enter an integer value:
+
+39
+
+Enter an integer value:
+
+28
+
+Enter an integer value:
+
+33
+
+The largest value entered is 41
+
+The lowest value entered is 19
+
+ 
+
+ 
+
+Process exited with code: 0
+
+ 
+
+AS6b Rainfall Statistics
+
+ 
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{      
+
+        
+
+   double rainfall[12];
+
+   double total= 0;
+
+   double average;
+
+  
+
+   for(int count = 0; count< 12; count++)
+
+   {
+
+       cout<<"Enter the rainfall (in inches) for month #"<<(count+1)<<endl;
+
+        cin>> rainfall[count];
+
+        total += rainfall[count];
+
+        average = total/12;
+
+       
+
+        while (rainfall[count]<0)
+
+        {
+
+         cout<<"Enter a positive number"<<endl;
+
+         cin>> rainfall[count];
+
+        }
+
+   }
+
+   cout<<"The total rainfall for the year is "<< total <<endl;
+
+   cout<<"The average rainfall for the year is "<<average<<endl;
+
+  
+
+   double highest;
+
+    highest = rainfall[0];
+
+       for(int count = 1; count < 12; count++)
+
+       {
+
+       if(rainfall[count]>highest)
+
+        highest = rainfall[count];
+
+       }
+
+       cout<<"The largest amount of rainfall was "<<highest<<endl;
+
+      
+
+        double lowest;
+
+   lowest = rainfall[0];
+
+    for(int count = 1; count < 12; count++)
+
+    {
+
+         if(rainfall[count]<lowest)
+
+      lowest = rainfall[count];
+
+     }
+
+     cout<<"The smallest amount of rainfall was "<<lowest<<endl; 
+
+        return 0;
+
+}
+
+ 
+
+ 
+
+TEST RUN
+
+ 
+
+Running /home/ec2-user/environment/assign-2.cpp
+
+Enter the rainfall (in inches) for month #1
+
+1.2
+
+Enter the rainfall (in inches) for month #2
+
+-1.3
+
+Enter a positive number
+
+1.3
+
+Enter the rainfall (in inches) for month #3
+
+2.1
+
+Enter the rainfall (in inches) for month #4
+
+1.7
+
+Enter the rainfall (in inches) for month #5
+
+1.4
+
+Enter the rainfall (in inches) for month #6
+
+2.2
+
+Enter the rainfall (in inches) for month #7
+
+3.0
+
+Enter the rainfall (in inches) for month #8
+
+1.8
+
+Enter the rainfall (in inches) for month #9
+
+1.0
+
+Enter the rainfall (in inches) for month #10
+
+2.4
+
+Enter the rainfall (in inches) for month #11
+
+2.7
+
+Enter the rainfall (in inches) for month #12
+
+2.0
+
+The total rainfall for the year is 20.2
+
+The average rainfall for the year is 1.68
+
+The largest amount of rainfall was 3.00
+
+The smallest amount of rainfall was 1.00
+
+ 
+
+AS6c Chips and Salsa
+
+ 
+
+#include<iostream>
+
+#include<string>
+
+using namespace std;
+
+int main()
+
+{
+
+    int total;
+
+    string highest;
+
+    string lowest;
+
+    const int size = 5;
+
+    string array[size] = { "mild", "medium", "sweet", "hot", "zesty"};
+
+    int val[size] ;
+
+    for(int count = 0; count< 5;count++)
+
+    {
+
+    cout<<"Jars sold last month of "<<array[count]<<":"<<endl;
+
+    cin>>val[count] ;
+
+    while(val[count]<0)
+
+    {
+
+        cout<<"Enter a positive number\n";
+
+        cin>>val[count];
+
+    }
+
+    }
+
+   
+
+    cout<<"Salsa Sales Report \n";
+
+    cout<<"Name \t\tJars Sold\n";
+
+    for(int count = 0; count< 5;count++)
+
+    {
+
+        cout<<array[count]<<"\t\t"<<val[count]<<endl;
+
+         total += val[count];
+
+       
+
+    }
+
+        cout<<"Total Sales: "<<total<<endl;
+
+ 
+
+   int high = val[0];
+
+   int low = val[0];
+
+   for(int count = 0; count<size;count++)
+
+   {
+
+       if(high < val[count])
+
+       highest = array[count];
+
+     
+
+   }
+
+   cout<<"High Seller :"<<highest<<endl;
+
+  
+
+   
+
+    for(int count = 0; count<size;count++)
+
+    {
+
+        if(low > val[count])
+
+        lowest = array[count];
+
+    }
+
+     cout<<"Low Seller :"<<lowest<<endl;
+
+    return 0;   
+
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/assign-5.cpp
+
+Jars sold last month of mild:
+
+4
+
+Jars sold last month of medium:
+
+6
+
+Jars sold last month of sweet:
+
+3
+
+Jars sold last month of hot:
+
+9
+
+Jars sold last month of zesty:
+
+1
+
+Salsa Sales Report
+
+Name            Jars Sold
+
+mild            4
+
+medium          6
+
+sweet           3
+
+hot             9
+
+zesty           1
+
+Total Sales: 23
+
+High Seller :hot
+
+Low Seller :zesty
+
+ 
+
+ 
+
+Process exited with code: 0
+
 AS6d Monkey Business
 
 #include<iostream>
