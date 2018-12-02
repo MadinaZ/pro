@@ -1,0 +1,152 @@
+AS6d Monkey Business
+
+#include<iostream>
+using namespace std;
+const int monkey = 3;
+const int day = 7;
+void score(double food[monkey][day])
+{
+
+
+for(int row = 0;row<monkey;row++)
+{
+for( int col = 0; col<day; col++) 
+{ 
+cout<<"Enter the pounds eaten by monkey number "<<(row + 1);
+cout<<"on day "<<(col + 1)<<": "<<endl;
+cin>>food[row][col];
+while(food[row][col]<0)
+{
+cout<<"Enter a positive number \n";
+cin>>food[row][col];
+}
+} 
+} 
+}
+void average(double food[monkey][day])
+{
+double total;
+for(int col = 0; col< day; col++)
+{ total = 0.0;
+for(int row = 0;row< monkey;row++)
+{
+total += food[row][col];
+}
+
+cout << "The average amount eaten on day ";
+cout<< (col + 1) << " is " << (total / 3)<<endl;
+
+
+}
+}
+void most(double food[monkey][day])
+{
+int row, col;
+double high = food[0][0];
+int mrow = 0; 
+int mcol = 0;
+for( row = 0; row< monkey; row++)
+{
+for(col = 0;col< day;col++)
+{
+if(food[row][col]>high)
+{
+high = food[row][col];
+mrow = row; 
+mcol = col;
+}
+}
+}
+cout<<"Monkey number "<<(mrow + 1)<<" ate the most amount of food, ";
+cout<<high<<" on day "<<(mcol + 1)<<endl;
+}
+void least(double food[monkey][day])
+{
+int row, col;
+double low = food[0][0];
+int lrow = 0;
+int lcol = 0;
+for( row = 0; row< monkey; row++)
+{
+for(col = 0;col< day;col++)
+{
+if(food[row][col]<low)
+{
+low = food[row][col];
+lrow = row;
+lcol = col;
+}
+}
+}
+cout<<"Monkey number "<<(lrow + 1)<<" ate the least amount of food, ";
+cout<<low<<" on day "<<(lcol + 1)<<endl;
+}
+
+
+int main()
+{
+double food[monkey][day];
+score(food);
+average(food);
+most(food);
+least(food);
+
+return 0;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/nadoel.cpp
+Enter the pounds eaten by monkey number 1on day 1: 
+1.1
+Enter the pounds eaten by monkey number 1on day 2: 
+2.1
+Enter the pounds eaten by monkey number 1on day 3: 
+1.3
+Enter the pounds eaten by monkey number 1on day 4: 
+1.5
+Enter the pounds eaten by monkey number 1on day 5: 
+2.7
+Enter the pounds eaten by monkey number 1on day 6: 
+1.2
+Enter the pounds eaten by monkey number 1on day 7: 
+1.6
+Enter the pounds eaten by monkey number 2on day 1: 
+1.9
+Enter the pounds eaten by monkey number 2on day 2: 
+2.2
+Enter the pounds eaten by monkey number 2on day 3: 
+2.3
+Enter the pounds eaten by monkey number 2on day 4: 
+2.4
+Enter the pounds eaten by monkey number 2on day 5: 
+1.8
+Enter the pounds eaten by monkey number 2on day 6: 
+2.5
+Enter the pounds eaten by monkey number 2on day 7: 
+1.9
+Enter the pounds eaten by monkey number 3on day 1: 
+3.1
+Enter the pounds eaten by monkey number 3on day 2: 
+3.2
+Enter the pounds eaten by monkey number 3on day 3: 
+3.5
+Enter the pounds eaten by monkey number 3on day 4: 
+3.8
+Enter the pounds eaten by monkey number 3on day 5: 
+3.9
+Enter the pounds eaten by monkey number 3on day 6: 
+3.7
+Enter the pounds eaten by monkey number 3on day 7: 
+3.0
+The average amount eaten on day 1 is 2.03333
+The average amount eaten on day 2 is 2.5
+The average amount eaten on day 3 is 2.36667
+The average amount eaten on day 4 is 2.56667
+The average amount eaten on day 5 is 2.8
+The average amount eaten on day 7 is 2.16667
+Monkey number 3 ate the most amount of food, 3.9 on day 5
+Monkey number 1 ate the least amount of food, 1.1 on day 1
+
+
+Process exited with code: 0
