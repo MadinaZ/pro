@@ -1,0 +1,559 @@
+AS 5a Rectangle Area—Complete the Program
+
+#include <iostream>
+
+using namespace std;
+
+double getLength()
+
+{
+
+                   double length;
+
+                  cout<<"Enter the length:";
+
+                  cin >> length;
+
+                  return length;   
+
+}
+
+double getWidth()
+
+{
+
+                  double width;
+
+                  cout << "Enter the width: ";
+
+                  cin >> width;
+
+                  return width;
+
+}
+
+double getArea(double &length, double &width)
+
+{
+
+                  double area;
+
+                  area = length * width;
+
+                  return area;
+
+}
+
+int displayData(double & length, double &width, double &area)
+
+{
+
+                  cout << "\nRectangle Data"
+
+                                    << "\n--------------"
+
+                       << "\nLength: " << length
+
+                       << "\nWidth:  " << width
+
+                       << "\nArea:   " << area;
+
+}
+
+ 
+
+int main()
+
+{
+
+                  double length;  // To hold the rectangle's length
+
+                  double width;    // To hold the rectangle's width
+
+                  double area;        // To hold the rectangle's area
+
+    length = getLength();
+
+    width = getWidth();
+
+    area = getArea( length,width);
+
+                  displayData( length, width, area );
+
+                  return 0;
+
+}
+
+ 
+
+TEST RUN
+
+ 
+
+Running /home/ec2-user/environment/123.cpp
+
+Enter the length:6
+
+Enter the width: 4
+
+ 
+
+Rectangle Data
+
+--------------
+
+Length: 6
+
+Width:  4
+
+Area:   24
+
+ 
+
+Process exited with code: 0
+
+AS 5b Falling Distance
+
+ 
+
+#include <iostream>
+
+#include <iomanip>
+
+using namespace std;
+
+double fallingDistance(int t)
+
+{
+
+                  const double g = 9.8;
+
+                  return .5 * g * t * t;
+
+}
+
+ 
+
+int main()
+
+{
+
+                  cout<< "    Time        Distance\n"
+
+                       << "---------------------------\n";
+
+ 
+
+                  for(int t = 1; t <= 10; t++)
+
+                  {
+
+                                   cout <<setw(4)<< t << "           "<<setw(4)
+
+                                    << fixed << setprecision(2)  
+
+                                    << fallingDistance(t) << endl;
+
+                  }
+
+ 
+
+                  return 0;
+
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/5b.cpp
+
+    Time        Distance
+
+---------------------------
+
+   1           4.90
+
+   2           19.60
+
+   3           44.10
+
+   4           78.40
+
+   5           122.50
+
+   6           176.40
+
+   7           240.10
+
+   8           313.60
+
+   9           396.90
+
+  10           490.00
+
+ 
+
+ 
+
+Process exited with code: 0
+
+ 
+
+AS 5c Lowest Score Drop
+
+#include <iostream>
+
+#include <iomanip>
+
+using namespace std;
+
+ 
+
+void getScore(int &);
+
+void calcAverage(int, int, int, int, int);
+
+int findLowest(int, int, int, int, int);
+
+ 
+
+int main() {
+
+                  int Score1,Score2,Score3,Score4,Score5;
+
+                                  
+
+                  for (int c = 1; c < 6; c++){
+
+                                   if (c == 1) {
+
+                                                     getScore(Score1);
+
+                                   }
+
+                                   else if (c == 2) {
+
+                                                     getScore(Score2);
+
+                                   }
+
+                                   else if (c == 3) {
+
+                                                     getScore(Score3);
+
+                                   }
+
+                                   else if (c == 4) {
+
+                                                     getScore(Score4);
+
+                                   }
+
+                                   else if (c == 5) {
+
+                                                     getScore(Score5);
+
+                                   }
+
+                                  
+
+                  }
+
+                  calcAverage(Score1, Score2, Score3, Score4, Score5);
+
+}
+
+ 
+
+void getScore(int &val) {
+
+                 
+
+                  cout << "Enter a test score: ";
+
+                  cin >> val;
+
+                  while ((val < 0) || (val > 100)) {
+
+                                   cout << "Test scores values can only be between 0 and 100." << endl
+
+                                                     << "Please reenter the test score: ";
+
+                                   cin >> val;
+
+                  }
+
+ 
+
+}
+
+ 
+
+void calcAverage(int num1, int num2, int num3, int num4, int num5) {
+
+ 
+
+                  int dropScore = findLowest(num1, num2, num3, num4, num5);
+
+                  int sum = num1 + num2 + num3 + num4 + num5 - dropScore;
+
+                  double average = sum / 4.0;
+
+ 
+
+                  cout << setprecision(2) << fixed << showpoint;
+
+                  cout << "The average score of the tests is: " << average << endl;
+
+}
+
+ 
+
+int findLowest(int num1, int num2, int num3, int num4, int num5) {
+
+                  int lowscore;
+
+     if(num1<num2<num3<num4<num5)
+
+     lowscore = num1;
+
+     else if (num2<num1<num3<num4<num5)
+
+     lowscore = num2;
+
+     else if (num3<num1<num2<num4<num5)
+
+     lowscore = num3;
+
+     else if (num4<num1<num3<num2<num5)
+
+     lowscore = num4;
+
+     else
+
+     lowscore = num5;
+
+                  return lowscore;
+
+}
+
+ 
+
+TEST RUN
+
+ 
+
+Running /home/ec2-user/environment/123.cpp
+
+Enter a test score: 10
+
+Enter a test score: 20
+
+Enter a test score: 30
+
+Enter a test score: 40
+
+Enter a test score: 50
+
+The average score of the tests is: 35.00
+
+ 
+
+ 
+
+Process exited with code: 0
+
+ 
+
+AS 5d Coin Toss
+
+#include <iostream>
+
+#include <cstdlib>
+
+#include <ctime>  
+
+using namespace std;
+
+ 
+
+int coinToss()
+
+{
+
+    int change = (rand()%2)+1;       
+
+                  if (change == 1)
+
+                                                     cout << "Heads!.\n";
+
+                                   else
+
+                                                     cout << "Tails!.\n"; 
+
+                                   return change;
+
+}
+
+int main()
+
+{
+
+    srand(time(0));
+
+ 
+
+                  int toss;                 
+
+                  cout << "How many tosses should I make?" << endl;                           
+
+                  cin >> toss;
+
+                  for(int num = 0;num<toss;num++)
+
+                  {               
+
+                                   coinToss();           
+
+                  }
+
+ 
+
+return 0;                                                                   
+
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/newfile.cpp
+
+How many tosses should I make?
+
+6
+
+Heads!.
+
+Tails!.
+
+Tails!.
+
+Tails!.
+
+Heads!.
+
+Heads!.
+
+ 
+
+ 
+
+Process exited with code: 0
+
+ 
+
+AS 5e Celsius Temperature Table
+
+#include<iostream>
+
+#include<iomanip>
+
+using namespace std;
+
+float celcius(float f )
+
+{
+
+    return (5*(f -32))/9;
+
+}
+
+int main()
+
+{
+
+   cout<<fixed<<setprecision(2)<<endl;
+
+   cout<<"Fahrenheit \t\t Ceiclius"<<endl;
+
+   cout<<"---------------------------------"<<endl;
+
+  
+
+   for(int f = 0;f<=20;f++)
+
+    {
+
+        cout <<setw(3)<< f << "           "<<setw(3)
+
+                                   << fixed << setprecision(1)  
+
+                                   << celcius(f)<< endl;
+
+    }
+
+  
+
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/5e.cpp
+
+ 
+
+Fahrenheit               Ceiclius
+
+---------------------------------
+
+  0           -17.8
+
+  1           -17.2
+
+  2           -16.7
+
+  3           -16.1
+
+  4           -15.6
+
+  5           -15.0
+
+  6           -14.4
+
+  7           -13.9
+
+  8           -13.3
+
+  9           -12.8
+
+ 10           -12.2
+
+ 11           -11.7
+
+ 12           -11.1
+
+ 13           -10.6
+
+ 14           -10.0
+
+ 15           -9.4
+
+ 16           -8.9
+
+ 17           -8.3
+
+ 18           -7.8
+
+ 19           -7.2
+
+ 20           -6.7
+
+ 
+
+ 
+
+Process exited with code: 0
+
+ 
