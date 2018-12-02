@@ -1,0 +1,409 @@
+AS 3a Rectangle
+
+ 
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+    int length1, length2, width1, width2, area1, area2 ;
+
+    cout<<"Enter the length of the 1st rectangle:\n";
+
+    cin>> length1;
+
+    cout<<"Enter the width of the 1st rectangle:\n";
+
+    cin>> width1;
+
+    cout<<"Enter the length of the 2nd rectangle:\n";
+
+    cin>> length2;
+
+    cout<<"Enter the width of the 2nd rectangle:\n";
+
+    cin>> width2;
+
+    area1 = length1 * width1;
+
+    area2 = length2 * width2;
+
+if (area1>area2)
+
+    cout<<"The 1st rectangle has the greater area.\n";
+
+    else
+
+        cout<<"The 2nd rectangle has the greater area.\n";
+
+    return 0;
+
+}
+
+TEST RUN
+
+Enter the length of the 1st rectangle:                                                                                                  
+
+3                                                                                                                                       
+
+Enter the width of the 1st rectangle:                                                                                                   
+
+7                                                                                                                                       
+
+Enter the length of the 2nd rectangle:                                                                                                  
+
+6                                                                                                                                       
+
+Enter the width of the 2nd rectangle:                                                                                                   
+
+4                                                                                                                                       
+
+The 2nd rectangle has the greater area.                                                                                                 
+
+                                                                                                                                        
+
+                                                                                                                                        
+
+...Program finished with exit code 0                                                                                                    
+
+Press ENTER to exit console.       
+
+AS 3b Math Tutor 2
+
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+#include<iomanip>
+using namespace std;
+int main()
+{
+int a, b, result, answer;
+srand(time(0));
+a = rand()%(1000);
+b = rand()%(1000);
+cout<<setw(4)<<a<<endl;
+cout<<"+";
+cout<<setw(3)<<b<<endl;
+cout<<"Enter to the answer here:\n";
+cin>> answer;
+result = a + b;
+if (answer == result)
+{
+cout<<"Congratulations!\n";
+cout<<"The answer is "<<result<<endl;
+}
+else
+{
+cout<<"Sorry that is incorrect.\n";
+cout<<"The answer is "<<result<<endl;
+}
+return 0;
+}
+
+TEST RUN
+
+ 918                                                                          
+
++598                                                                          
+
+Enter to the answer here:                                                     
+
+1516                                                                          
+
+Congratulations!                                                              
+
+The answer is 1516   
+
+----------------------------
+
+ 991                                                                          
+
++610                                                                          
+
+Enter to the answer here:                                                     
+
+234                                                                           
+
+Sorry that is incorrect.                                                      
+
+The answer is 1601                                                            
+
+                                                                              
+
+                                                                              
+
+...Program finished with exit code 0                                          
+
+Press ENTER to exit console.      
+
+ 
+
+AS 3c Race
+
+ 
+
+#include<iostream>
+
+#include<string>
+
+using namespace std;
+
+int main()
+
+{
+
+double time1, time2, time3;
+
+string name1, name2, name3;
+
+cout<<"Enter the names of three runners and their finishing times.\n";
+
+cout<<"I will tell you who came in first, second, and third.\n";
+
+cout<<"Name of Runner 1:\n";
+
+cin>>name1;
+
+cout<<"Runner 1's finishing time:\n";
+
+cin>>time1;
+
+cout<<"Name of Runner 2:\n";
+
+cin>>name2;
+
+cout<<"Runner 2's finishing time:\n";
+
+cin>>time2;
+
+cout<<"Name of Runner 3:\n";
+
+cin>>name3;
+
+cout<<"Runner 1's finishing time:\n";
+
+cin>>time3;
+
+if( time1<time2 && time1<time3)
+
+cout<<name1<<" came in 1st place."<<endl;
+
+else if( time2<time1 && time2<time3)
+
+cout<<name2<<" came in 1st place."<<endl;
+
+else if( time3<time1 && time3<time2)
+
+cout<<name3<<" came in 1st place."<<endl;
+
+if ((time1>time2 && time1<time3 )||( time1<time2 && time1>time3))
+
+cout<<name1<<" came in 2nd place"<<endl;
+
+else if ((time2>time1 && time2<time3 )||( time2<time1 && time2>time3))
+
+cout<<name2<<" came in 2nd place"<<endl;
+
+else if ((time3>time1 && time3<time2 )||( time3<time1 && time3>time2))
+
+cout<<name3<<" came in 2nd place"<<endl;
+
+if (time1>time2 && time1>time3)
+
+cout<<name1<<" came in 3rd place" <<endl;
+
+else if (time2>time1 && time2>time3)
+
+cout<<name2<<" came in 3rd place" <<endl;
+
+else if (time3>time2 && time3>time1)
+
+cout<<name3<<" came in 3rd place" <<endl;
+
+ 
+
+return 0;
+
+}
+
+ 
+
+TEST RUN
+
+Enter the names of three runners and their finishing times.
+
+I will tell you who came in first, second, and third.
+
+Name of Runner 1:
+
+Sam
+
+Runner 1's finishing time:
+
+15.5
+
+Name of Runner 2:
+
+Melissa
+
+Runner 2's finishing time:
+
+14.6
+
+Name of Runner 3:
+
+Jack
+
+Runner 1's finishing time:
+
+16.7
+
+Melissa came in 1st place.
+
+Sam came in 2nd place
+
+Jack came in 3rd place
+
+ 
+
+ 
+
+ 
+
+AS 3d Geometry Calculator
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main()
+{
+int choice;
+const double PI = 3.14159;
+cout<<"Geometry Calculator\n";
+
+cout<<"1. Calculate the area of a Circle\n";
+cout<<"2. Calculate the area of a Rectangle\n";
+cout<<"3. Calculate the area of a Triangle\n";
+cout<<"4. Quit\n";
+cout<<"Enter your choice (1-4):\n";
+cin>>choice;
+if (choice == 1)
+{
+double area1,radius;
+cout<<"Enter the circle's radius:"<<endl;
+cin>>radius;
+area1 = PI * pow(radius,2.0);
+cout<<"The area is "<<area1<<endl;
+}
+else if ( choice == 2)
+{
+int length, width, area2;
+cout<<"Enter the length of the rectangle: "<<endl;
+cin>> length;
+cout<<"Enter the width of the rectangle: "<<endl;
+cin>> width;
+area2 = length * width;
+cout<<"The area of the rectangle is "<<area2<<endl;
+}
+else if (choice == 3)
+{
+int base, height, area3;
+cout<<"Enter the base of the triangle: "<<endl;
+cin>> base;
+cout<<"Enter the height of the triangle: "<<endl;
+cin>> height;
+area3 = .5 * base * height;
+cout<<"The area of the triangle is "<<area3<<endl;
+}
+else if( choice == 4)
+cout<<"Program ending\n";
+return 0;
+}
+
+TEST RUN
+
+Geometry Calculator                                                           
+
+Calculate the area of a Circle                                             
+Calculate the area of a Rectangle                                          
+Calculate the area of a Triangle                                           
+Quit                                                                       
+Enter your choice (1-4):                                                      
+
+1                                                                             
+
+Enter the circle's radius:                                                    
+
+3                                                                             
+
+The area is 28.2743     
+
+------------------------------------------------
+
+Geometry Calculator                                                           
+
+Calculate the area of a Circle                                             
+Calculate the area of a Rectangle                                          
+Calculate the area of a Triangle                                           
+Quit                                                                       
+Enter your choice (1-4):                                                      
+
+2                                                                             
+
+Enter the length of the rectangle:                                            
+
+4                                                                             
+
+Enter the width of the rectangle:                                             
+
+3                                                                             
+
+The area of the rectangle is 12   
+
+--------------------------------------------------
+
+Geometry Calculator                                                           
+
+Calculate the area of a Circle                                             
+Calculate the area of a Rectangle                                          
+Calculate the area of a Triangle                                           
+Quit                                                                       
+Enter your choice (1-4):                                                      
+
+3                                                                             
+
+Enter the base of the triangle:                                               
+
+3                                                                             
+
+Enter the height of the triangle:                                             
+
+6                                                                             
+
+The area of the triangle is 9     
+
+---------------------------------------------
+
+Geometry Calculator                                                           
+
+Calculate the area of a Circle                                             
+Calculate the area of a Rectangle                                          
+Calculate the area of a Triangle                                           
+Quit                                                                       
+Enter your choice (1-4):                                                      
+
+4                                                                             
+
+Program ending                                                                
+
+                                                                              
+
+                                                                              
+
+...Program finished with exit code 0                                          
+
+Press ENTER to exit console.       
