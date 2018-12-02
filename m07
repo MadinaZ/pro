@@ -1,0 +1,316 @@
+Assignment 8a CStrings
+
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cctype>
+using namespace std;
+int main()
+{
+
+char word1[100];
+char word2[100];
+
+cout<<"Enter a word: \n";
+cin.get(word1,100);
+cout<<"Enter a word: \n";
+cin>>word2;
+
+if(strcmp(word1, word2) == 0)
+cout<<"You entered the same string twice.\n";
+else
+cout<<"The words are not the same.\n";
+cout<<"First word:\n";
+cout<<word1<<endl;
+
+for(int i = 0;i<strlen(word1);i++)
+word1[i] = toupper(word1[i]);
+cout<<word1<<endl;
+for(int i = 0;i<strlen(word1);i++)
+word1[i] = tolower(word1[i]);
+cout<<word1<<endl;
+
+int length;
+length = strlen(word1);
+cout<<length<<endl;
+
+cout<<"first character is: "<<word1[0]<<endl;
+cout<<"last character is " << word1[strlen(word1)-1]<<endl;
+
+cout<<"Second word:\n";
+cout<<word2<<endl;
+for(int i = 0;i<strlen(word2);i++)
+word2[i] = toupper(word2[i]);
+cout<<word2<<endl;
+for(int i = 0;i<strlen(word2);i++)
+word2[i] = tolower(word2[i]);
+cout<<word2<<endl;
+
+int length2;
+length2 = strlen(word2);
+cout<<length2<<endl;
+cout<<"first character is: "<<word2[0]<<endl;
+cout<<"last character is " << word2[strlen(word2)-1]<<endl;
+
+cout<<"The entered words in order: \n";
+if(strcmp(word1, word2)<0)
+cout<<word1<<" "<<word2<<endl;
+else if(strcmp(word1,word2)>0)
+cout<<word2<<" "<<word1<<endl;
+
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/new8a.cpp
+Enter a word: 
+hello
+Enter a word: 
+world
+The words are not the same.
+First word:
+hello
+HELLO
+hello
+5
+first character is: h
+last character is o
+Second word:
+world
+WORLD
+world
+5
+first character is: w
+last character is d
+The entered words in order: 
+hello world
+
+
+Process exited with code: 0
+
+ 
+
+Assignment 8b CppStrings
+
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cctype>
+using namespace std;
+int main()
+{
+
+string word1;
+string word2;
+cout<<"Enter first word: ";
+getline(cin,word1);
+cout<<"Enter second word: ";
+getline(cin,word2);
+
+
+cout<<"1st word: ";
+cout<<word1<<endl;
+cout<<"Total characters: ";
+int length;
+length = word1.length();
+cout<<length<<endl;
+cout<<"First character: ";
+char ch1 = word1.front();
+cout<<ch1<<endl;
+cout<<"Last character: ";
+char ch = word1.back();
+cout<<ch<<endl;
+
+cout<<"First word upper: ";
+for(int i = 0;i<word1.length();i++)
+word1[i] = toupper(word1[i]);
+cout<<word1<<endl;
+cout<<"First word lower: ";
+for(int i = 0;i<word1.length();i++)
+word1[i] = tolower(word1[i]);
+cout<<word1<<endl;
+
+cout<<"2nd word: ";
+cout<<word2<<endl;
+cout<<"Total characters: ";
+int length2;
+length2 = word2.length();
+cout<<length2<<endl;
+cout<<"First character: ";
+char ch2 = word2.front();
+cout<<ch2<<endl;
+cout<<"Last character: ";
+char ch3 = word2.back();
+cout<<ch3<<endl;
+
+cout<<"First word upper: ";
+for(int i = 0;i<word2.length();i++)
+word2[i] = toupper(word2[i]);
+cout<<word2<<endl;
+cout<<"First word lower: ";
+for(int i = 0;i<word2.length();i++)
+word2[i] = tolower(word2[i]);
+cout<<word2<<endl;
+
+if(word1.compare(word2) == 0)
+cout<<"You entered the same string twice.\n";
+else
+cout<<"The words are not the same.\n";
+
+cout<<"The entered words in order: \n";
+if(word1.compare(word2)<0)
+cout<<word1<<" "<<word2<<endl;
+else if(word2.compare(word1)>0)
+cout<<word2<<" "<<word1<<endl;
+return 0;
+
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/new8b.cpp
+Enter first word: hello
+Enter second word: world
+1st word: hello
+Total characters: 5
+First character: h
+Last character: o
+First word upper: HELLO
+First word lower: hello
+2nd word: world
+Total characters: 5
+First character: w
+Last character: d
+First word upper: WORLD
+First word lower: world
+The words are not the same.
+The entered words in order: 
+hello world
+
+
+Process exited with code: 0
+
+ 
+
+Assignment 8c Sum of Digits in String
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main()
+{
+const int length = 100;
+char dig[length];
+int val;
+int sum = 0;
+cout << "Enter a series of digits with no spaces between them. \n";
+cin >> dig;
+val = atoi(dig);
+while ( val > 0 )
+{
+sum += val % 10;
+val /= 10;
+}
+cout << "The sum of those digits is " << sum <<endl;
+char max = dig[0];
+for (int i = 0; i < strlen(dig); i++)
+{
+if (dig[i] > max)
+{
+max = dig[i];
+}
+}
+cout << "The highest digit is " << max << endl;
+char min = dig[0];
+for (int i = 0; i < strlen(dig); i++)
+{
+if (dig[i]< min)
+{
+min = dig[i];
+}
+}
+cout << "The lowest digit is " << min << endl;
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/newfile.cpp
+Enter a series of digits with no spaces between them. 
+1234567
+The sum of those digits is 28
+The highest digit is 7
+The lowest digit is 1
+
+
+Process exited with code: 0
+
+ 
+
+Assignment 8d Password Verifier
+
+{
+char pas[50];
+int upper, lower, digit, alp;
+cout <<"Create your password: \n";
+cin.get(pas,50);
+
+do
+{
+for (int i = 0; i < strlen(pas); i++)
+{
+if (isupper(pas[i]))
+upper++;
+if (islower(pas[i]))
+lower++;
+if(isalpha(pas[i]))
+alp++;
+if(isdigit(pas[i]))
+digit++;
+}
+
+if (strlen(pas) < 6)
+cout << "Must be 6 or more characters.\n";
+if (upper < 1)
+cout << "Must be at least one uppercase character\n";
+if (lower < 1)
+cout << "Must be at least one lowercase character\n";
+if (digit < 1)
+cout << "Must be at least one digit\n"; 
+if(alp<1)
+cout<<"Must be at least one alphabet \n";
+}
+while (upper < 1 && lower < 1 && digit < 1 && strlen(pas) < 6 && alp<1);
+
+if(upper > 0 && lower > 0 && digit > 0 && strlen(pas) >= 6 && alp>0)
+cout << "Password verified. Your password is: " << pas << endl;
+else
+cout<<"Your password is NOT valid, Try again.\n";
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/as8.cpp
+
+Create your password: 
+hello 
+Must be 6 or more characters.
+Must be at least one uppercase character
+Must be at least one digit
+Your password is NOT valid, Try again.
+
+Create your password: 
+HEllo123
+Password verified. Your password is: HEllo123
+
+ 
