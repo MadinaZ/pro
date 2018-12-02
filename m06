@@ -1,0 +1,246 @@
+AS7a File Head Program
+
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() 
+{
+
+string line;
+fstream file;
+string filename;
+
+cout<<"Enter the file name:\n";
+cin>>filename;
+int counter = 1;
+
+file.open(filename, ios::in);
+while(getline(file, line))
+{
+if(counter <= 10)
+{
+counter++;
+cout << line << endl;
+}
+}
+
+if(counter < 10)
+{
+cout << "\nThe file has fewer than 10 lines, the entire file :\n\n";
+while(getline(file, line))
+cout << line << endl;
+}
+file.close();
+return 0;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/pro2.cpp
+Enter the file name:
+ai.txt
+No.
+he said.
+“no,” he said.
+“no,” i said.
+“i know,” she said.
+“thank you,” she said.
+“come with me,” she said.
+“talk to me,” she said.
+“don’t worry about it,” she said.
+it made me want to cry.
+
+
+Process exited with code: 0
+
+ 
+
+AS7b File Display Program
+
+#include <iostream>
+#include <fstream>
+#include<string>
+using namespace std;
+
+int main()
+{
+string input;
+char ch;
+string filename;
+
+cout<<"Enter the file name"<<endl;
+getline(cin, filename);
+
+fstream file;
+file.open(filename,ios::in);
+
+for(int count = 1; !file.eof(); count++)
+{ 
+getline(file,input);
+cout<<input<<endl;
+if(count%24 == 0)
+{
+cout<<"Press enter to continue"<<endl;
+cin.get(ch);
+}
+
+}
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/4.try.cpp
+Enter the file name
+ai.txt
+No.
+he said.
+“no,” he said.
+“no,” i said.
+“i know,” she said.
+“thank you,” she said.
+“come with me,” she said.
+“talk to me,” she said.
+“don’t worry about it,” she said.
+it made me want to cry.
+no one had seen him since.
+it made me feel uneasy.
+no one had seen him.
+the thought made me smile.
+the pain was unbearable.
+the crowd was silent.
+the man called out.
+the old man said.
+the man asked.
+he was silent for a long moment.
+he was silent for a moment.
+it was quiet for a moment.
+it was dark and cold.
+there was a pause.
+Press enter to continue
+
+it was my turn.
+there is no one else in the world.
+there is no one else in sight.
+they were the only ones who mattered.
+they were the only ones left.
+he had to be with me.
+she had to be with him.
+i had to do this.
+i wanted to kill him.
+i started to cry.
+i turned to him.
+
+
+Process exited with code: 0
+
+ 
+
+AS7c File Tail Program
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+string input, name;
+cout<<"Enter the file name\n";
+cin>>name;
+fstream file;
+file.open(name,ios::in);
+vector<string> line;
+while(!file.eof())
+{
+getline(file,input);
+line.push_back(input);
+}
+
+int count = line.size()-10;
+for(count;count<line.size();count++)
+{
+cout<<line[count]<<endl;
+}
+
+return 0;
+}
+
+TEST RUN 
+
+Running /home/ec2-user/environment/work.cpp
+Enter the file name
+ai.txt
+there is no one else in the world.
+there is no one else in sight.
+they were the only ones who mattered.
+they were the only ones left.
+he had to be with me.
+she had to be with him.
+i had to do this.
+i wanted to kill him.
+i started to cry.
+i turned to him.
+
+
+Process exited with code: 0
+
+AS7d String Search
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include<vector>
+using namespace std;
+int main()
+{
+string name,line,search; 
+int count = 0;
+int line_count= 0;
+int num;
+cout << "Enter the name of a file: ";
+cin >> name;
+
+fstream file;
+file.open(name, ios::in);
+cout << "Enter string to search for: ";
+cin>> search;
+
+while (file)
+{
+getline(file, line);
+line_count++;
+if (line.find(search) < line.length())
+{
+cout<<line_count<<":" << line << endl;
+count++;
+
+}
+}
+cout<<search<<" was found "<<count<< " times."<<endl;
+
+file.close();
+return 0;
+}
+
+ 
+
+TEST RUN
+
+Enter the name of a file: ai.txt
+Enter string to search for: moment
+20:he was silent for a long moment.
+21:he was silent for a moment.
+22:it was quiet for a moment.
+moment was found 3 times.
+
+
+Process exited with code: 0
+
+ 
