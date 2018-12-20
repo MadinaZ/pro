@@ -1,0 +1,246 @@
+AS 10a Select Sort using array
+
+#include<iostream>
+using namespace std;
+int main() 
+{
+int n,a[1005];
+cin » n;
+
+cout«"Sort to Max side : \n";
+for (int i = 1; i <= n; i++) {
+cin » a[i];
+}
+for (int i = n; i > 1; i--) {
+for (int j = i - 1; j >= 1; j--) {
+if (a[i] < a[j]) swap(a[i],a[j]);
+}
+for (int j = 1; j <= n; j++) {
+cout « a[j] « ' ';
+}
+cout«endl;
+}
+
+cout«"Sort to Min side: \n";
+for (int i = 1; i <= n; i++) {
+cin » a[i];
+}
+for (int i = 1; i < n; i++) {
+for (int j = i + 1; j <= n; j++) {
+if (a[i] > a[j]) swap(a[i],a[j]);
+}
+for (int j = 1; j <= n; j++) {
+cout « a[j] « ' ';
+}
+cout « endl;
+}
+
+return 0;
+}
+
+
+
+TEST RUN
+
+Running /home/ec2-user/environment/as10.cpp
+6
+Sort to Max side : 
+1 6 2 4 3 5
+1 5 2 4 3 6 
+1 4 2 3 5 6 
+1 3 2 4 5 6 
+1 2 3 4 5 6 
+1 2 3 4 5 6 
+Sort to Min side: 
+1 6 2 4 3 5
+1 6 2 4 3 5 
+1 2 6 4 3 5 
+1 2 3 6 4 5 
+1 2 3 4 6 5 
+1 2 3 4 5 6
+
+Process exited with code: 0
+
+
+
+AS 10b Vector Exercises 
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+vector<string> str;
+string s;
+cout<<"Enter a word\n";
+cin>>s;
+str.push_back(s);
+cout<<"size: "<<s.size()<<endl;
+cout<<"capacity: "<<s.capacity()<<endl;
+cout<<"request change in capacity:"<<endl;
+s.reserve(20);
+cout<<"now capacity is "<<s.capacity()<<endl;
+
+cout<<"the 3 letter is: "<<s.at(3)<<endl;
+cout<<"the first letter is: "<<s.front()<<endl;
+cout<<"the last letter is: "<<s.back()<<endl;
+vector<int> num{ 2, 4, 6, 8};
+cout<<"original numbers "<<endl;
+for(unsigned int i = 0; i< num.size();i++)
+cout<<num[i]<<" ";
+cout<<endl;
+num.insert(num.begin() + 1,3);
+cout<<"number 3 inserted between 2 and 4 "<<endl;
+for(unsigned int i = 0; i< num.size();i++)
+cout<<num[i]<<" ";
+cout<<endl;
+cout<<"Erasing the last num (8)"<<endl;
+num.erase(num.begin() + 4);
+for(unsigned int i = 0; i< num.size();i++)
+cout<<num[i]<<" ";
+cout<<endl;
+
+vector<int> str2 = {1, 3, 5, 7};
+str2.swap(num);
+cout<<"Now the first vector is equal to: "<<endl;
+for(unsigned int i = 0; i< str2.size();i++)
+cout<<str2[i]<<" ";
+cout<<endl;
+cout<<"After swap it is: "<<endl;
+for(unsigned int i = 0; i< num.size();i++)
+cout<<num[i]<<" ";
+cout<<endl;
+
+cout<<"Delete last element (pop_back)";
+str2.pop_back();
+for(int i = 0; i< str2.size();i++)
+cout<<str2[i]<<" ";
+
+}
+
+ 
+
+TEST RUN
+
+Running /home/ec2-user/environment/prct3.cpp
+Enter a word
+Hello
+size: 5
+capacity: 8
+request change in capacity:
+now capacity is 20
+the 3 letter is: l
+the first letter is: H
+the last letter is: o
+original numbers 
+2 4 6 8 
+number 3 inserted between 2 and 4 
+2 3 4 6 8 
+Erasing the last num (8)
+2 3 4 6 
+Now the first vector is equal to: 
+2 3 4 6 
+After swap it is: 
+1 3 5 7 
+Delete last element (pop_back)2 3 4
+
+Process exited with code: 0
+
+ 
+
+ 
+AS 10c Different ways to solve Factorial
+
+#include<iostream>
+using namespace std;
+int func(int x)
+{
+if(x == 1)
+return 1;
+else
+return x*func(x-1);
+}
+int main()
+{
+
+int n,p;
+p = 1;
+cin»n;
+for(int i = 0; i < n; i++)
+{
+p = p*(i+1);
+}
+cout«"Iterative solution \n";
+cout«p«endl;
+//------------
+cout«"Recursive solution \n";
+cout«func(n);
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/as10c.cpp
+3
+Iterative solution 
+6
+Recursive solution 
+6
+
+Process exited with code: 0
+
+
+
+AS 10d Recursion Fibonacci Sequence
+
+#include<iostream>
+#include<cctype>
+using namespace std;
+
+int rabbit (char n) {
+if (n == '1' || n == '2')
+return 1;
+else {
+return rabbit(n - 1) + rabbit(n - 2);
+}
+}
+
+int main() {
+char d;
+
+do
+{
+cout«"Enter a positive number (else to quit): \n";
+cin » d;
+
+if(d != 'q' )
+{
+cout«"Fibonacci ("«d«") is ";
+cout « rabbit(d)«endl;
+}
+else
+{
+cout«"Bye";
+break;
+}
+}while(d != 'q');
+
+return 0;
+}
+
+TEST RUN
+
+Running /home/ec2-user/environment/as10d.cpp
+Enter a positive number (else to quit): 
+6
+Fibonacci (6) is 8
+Enter a positive number (else to quit): 
+8
+Fibonacci (8) is 21
+Enter a positive number (else to quit): 
+q
+Bye
+
+Process exited with code: 0
+ 
+More
+
