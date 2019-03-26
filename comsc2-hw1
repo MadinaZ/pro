@@ -1,0 +1,128 @@
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int myStrlen(char val[])
+{
+   int i = 0;
+    while (val[i] != '\0')
+        i++;
+        return i;
+}
+
+void myStrcat(char val[], char val2[])
+{
+    int i = 0, j = 0;
+    while (val[i] != '\0') {
+        i++;
+    }
+
+    while (val2[j] != '\0') {
+        val[i] = val2[j];
+        j++;
+        i++;
+    }
+    val[i] = '\0';
+    cout<<val<<endl;
+}
+
+void myStrcpy(char val[], int size, char val2[])
+{
+   int i;
+   for(i = 0; val[i] != '\0'; i++)
+   val[i] = val2[i];
+   cout<<val<<endl;
+}
+void myStrcat_BC(char val[], int size, char val2[])
+{
+   myStrcat(val,val2);
+   if(myStrlen(val) > size)
+   cout<<"Out of bound"<<endl;
+}
+
+bool isPalindromic(char val[])
+{
+    int t;
+    char c;
+    for(int i = 0;i < myStrlen(val);i++)
+   {
+       for(int j = myStrlen(val) -1; j >= 0;j--)
+       {
+           if(isupper(val[i]))
+           val[i] = tolower(val[i]);
+
+           if(val[i] == val[j])
+           {
+           val[0] = toupper(val[0]);
+           return 1;
+           }
+           else
+           return 0;
+       }
+   }
+}
+
+int main()
+{
+ const int num = 11;
+ char s1[num] = "Hello ";
+ char s2[num] = "World";
+cout << "s1: "<< s1 << endl;
+cout << "The length of s1: "<<myStrlen(s1);
+
+cout<<endl;
+
+cout << "Doing strcat(s1, s2) " << endl;
+cout << "s1: ";
+myStrcat(s1,s2);
+cout<< "The length of s1: " << myStrlen(s1) << endl << endl;
+
+cout << "Doing strcpy(s1, s2) " << endl;
+cout << "s1: ";
+myStrcpy(s1,num,s2);
+cout << "The length of s1: " << myStrlen(s1) << endl << endl;
+
+cout << "Doing myStrcat_BC(s1, s2, SIZE) " << endl;
+myStrcat_BC(s1, num, s2);
+cout << "s1: " << " " << s1 << endl;
+cout << "The length of s1: ";
+cout<<myStrlen(s1);
+
+cout<<endl;
+char s3[num] = "World";
+cout<<"\n" << "Doing isPalindromic(s3)" << endl;
+if(isPalindromic(s3) == 1)
+cout<<s3 << " is a palindromic word." << endl;
+else
+{
+s3[0] = toupper(s3[0]);
+cout << s3 << " is not a palindromic word." << endl<<endl;
+}
+
+char s4[num] = "I";
+cout << "Doing isPalindromic(s4)" << endl;
+if (isPalindromic(s4) == 1)
+cout << s4 << " is a palindromic word." << endl << endl;
+else
+cout << s4 << " is not a palindromic word." << endl << endl;
+
+
+char s5[num] = "Radar";
+cout << "Doing isPalindromic(s5)" << endl;
+if (isPalindromic(s5) == 1)
+cout << s5 << " is a palindromic word." << endl << endl;
+else
+cout << s5 << " is not a palindromic word." << endl << endl;
+
+char s6[num] = "eye";
+cout << "Doing isPalindromic(s6)" << endl;
+if (isPalindromic(s6) == 1)
+cout << s6 << " is a palindromic word." << endl << endl;
+else
+cout << s6 << " is not a palindromic word." << endl << endl;
+
+return 0;
+}
+
