@@ -1,0 +1,135 @@
+#include <iostream>
+#include <cmath>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+class Circle
+{
+private:
+    char type = ' ';
+    int sernum;
+    int radius;
+    int density;
+
+public:
+    Circle(char, int, int);
+    Circle(char,int,int,int);
+    ~Circle();
+    int getrad() const;
+    char getType() const;
+    int getdens() const;
+    void dispc(char,int,int);
+    void spray(char,int,int);
+    void drawAll();
+    void deleteAll();
+    void check();
+};
+
+    Circle::Circle(char c, int sn, int r)
+    {
+       type = c;
+       sernum = sn;
+       radius = r;
+    }
+
+    Circle::Circle(char c, int sn, int r, int d )
+    {
+       type = c;
+       sernum = sn;
+       radius = r;
+       density = d;
+    }
+    Circle::~Circle()
+    {
+
+    }
+
+    int Circle::getrad() const
+    {
+        return radius;
+    }
+    char Circle::getType() const
+    {
+        return type;
+    }
+
+    int Circle::getdens() const
+    {
+        return density;
+    }
+    int dispc(Circle *p)
+    {
+          for (int y= p->getrad();y >= -(p->getrad());y-=2)
+          {
+             for (int x=-(p->getrad());x <= p -> getrad();x++)
+             {
+                if (sqrt(pow(x,2)+pow(y,2)) == p->getrad()) cout << "*";
+                else cout << " ";
+             }
+               cout << "\n";
+          }
+
+    }
+
+    int spray(Circle *p)
+    {
+        srand(time(0));
+        for (int y= p->getrad();y >= -(p->getrad());y-=2)
+          {
+             for (int x=-(p->getrad());x <= p -> getrad();x++)
+             {
+                if (sqrt(pow(x,2)+pow(y,2)) < p->getrad())
+                {
+                if(rand()%100 < p->getdens())
+                    cout << "*";
+                else
+                    cout << " ";
+                }
+                else
+                cout << " ";
+        }
+        cout << endl;
+        }
+
+
+    }
+
+    void drawAll(Circle *arr[],int size)
+    {
+        for(int i = 0; i < size;i++)
+        {
+            if(arr[i]->getType() == 'C')
+            dispc(arr[i]);
+            else if(arr[i]->getType() == 'S')
+            spray(arr[i]);
+        }
+    }
+
+    void deleteAll(Circle *arr[],int size)
+    {
+        for(int i = 0; i <= size;i++)
+        {
+          delete arr[i];
+        }
+    }
+int main()
+
+{
+    const int SIZE = 3;
+
+    Circle * arrCircle[SIZE] = {nullptr};
+
+    arrCircle[0] = new Circle('C', 1001, 20);
+
+    arrCircle[1] = new Circle('S', 1002, 25,30);
+
+    arrCircle[2] = new Circle('S', 1003, 40, 80);
+
+    drawAll(arrCircle, SIZE);
+
+    deleteAll(arrCircle, SIZE);
+
+    return 0;
+
+}
