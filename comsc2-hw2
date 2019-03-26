@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include<iomanip>
+using namespace std;
+struct Student {
+int ID;
+char Name[100];
+char Course[100];
+int Credit;
+int Score;
+    };
+
+int main(){
+    const int SIZE=11;
+
+    Student s[SIZE];
+    ifstream in("StudentRecords.txt");
+
+    if (!in){
+    cerr << "File can't be opened! " << endl;
+    }
+    for (int i = 0; i < SIZE; i++){
+    in >> s[i].ID >> s[i].Name
+    >>s[i].Course >> s[i].Credit >> s[i].Score ;
+    }
+
+    for(int i = 0; i < SIZE;i++)
+    {
+     int n = 0, t = 0, x = 0, gpa = 0;
+     double z;
+     cout<<s[i].ID<<" "<<s[i].Name<<endl;
+        for(int j = 0; i < SIZE; i++)
+        {
+            if(s[i].ID == s[j].ID)
+            {
+                if(s[i].Score >= 90)
+                n = 4;
+                else if(s[i].Score >= 80 && s[i].Score <=89)
+                n = 3;
+                else if(s[i].Score >= 70 && s[i].Score <= 79)
+                n = 2;
+                else if(s[i].Score >= 60 && s[i].Score <= 69)
+                n = 1;
+                else
+                n = 0;
+
+                gpa = n*s[i].Credit;
+                t += gpa;
+                x += n;
+                z = (double)t/x;
+                cout<<s[i].Course<<" "<<s[i].Credit<<" "<<s[i].Score<<" "<<n<<endl;
+            }
+        }
+    cout<<fixed<<showpoint<<setprecision(2);
+    cout<<"GPA "<<z<<endl;
+    }
+
+
+
+    for(int i = 1; i < SIZE;i++)
+    {
+     int n = 0, t = 0, x = 0, gpa = 0;
+     double z;
+     cout<<s[i].ID<<" "<<s[i].Name<<endl;
+        for(int j = 1; i < SIZE; i++)
+        {
+            if(s[i].ID == s[j].ID)
+            {
+                if(s[i].Score >= 90)
+                n = 4;
+                else if(s[i].Score >= 80 && s[i].Score <=89)
+                n = 3;
+                else if(s[i].Score >= 70 && s[i].Score <= 79)
+                n = 2;
+                else if(s[i].Score >= 60 && s[i].Score <= 69)
+                n = 1;
+                else
+                n = 0;
+
+                gpa = n*s[i].Credit;
+                t += gpa;
+                x += s[i].Credit;
+                z = (double)t/x;
+                cout<<s[i].Course<<" "<<s[i].Credit<<" "<<s[i].Score<<" "<<n<<endl;
+            }
+        }
+    cout<<fixed<<showpoint<<setprecision(2);
+    cout<<"GPA "<<z<<endl;
+    }
+
+return 0;
+}
