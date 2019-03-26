@@ -1,0 +1,81 @@
+#include <string>
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+using namespace std;
+struct studentInfo{
+    int ID;
+    string firstName;
+    string lastName;
+    double GPA;
+
+};
+const int SIZE = 100;
+
+void display(studentInfo *a[SIZE],int n)
+{
+   for(int i = 0; i < n ;i++)
+   {
+       cout<<a[i]->ID<<" "<<a[i]->firstName<<" "<<a[i]->lastName<<" "<<a[i]->GPA<<endl;
+   }
+}
+void resetGPA(studentInfo *a[SIZE],int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+    a[i]->GPA = 0.0;
+    }
+}
+void sortStud(studentInfo *a[SIZE],int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+    for(int j = i + 1; j < n; j++)
+    {
+    if(a[i]->ID > a[j]->ID){
+    swap(a[i],a[j]);
+    }
+    }
+    }
+}
+int main()
+{
+    int i;
+    int ID;
+    string firstName;
+    string lastName;
+    double GPA;
+    studentInfo * arrStud[SIZE];
+    ifstream inputFile;
+    inputFile.open("StudentInfo.txt");
+    if (inputFile.is_open())
+    {
+for(i = 0;!inputFile.eof();i++)
+{
+    inputFile >> ID >> firstName >> lastName >> GPA;
+    arrStud[i] = nullptr;
+    arrStud[i] = new studentInfo;
+    arrStud[i]->ID = ID;
+    arrStud[i]->firstName = firstName;
+    arrStud[i]->lastName = lastName;
+    arrStud[i]->GPA = GPA;
+}
+    }
+    else
+    cout << "File cannot be opened.";
+    inputFile.close();
+    display(arrStud,i);
+    cout << endl;
+    cout << "Sorting students by ID..." << endl;
+    cout << endl;
+    sortStud(arrStud,i);
+    display(arrStud,i);
+    cout << endl;
+    cout << "Resetting GPA data..." << endl;
+    cout << endl;
+    resetGPA(arrStud,i);
+    display(arrStud,i);
+    for(i = 0;!inputFile.eof();i++)
+    delete [] *arrStud;// How should the pointers in the array be deleted?
+    }
+
