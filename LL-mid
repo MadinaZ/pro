@@ -1,0 +1,174 @@
+#include <iostream>
+using namespace std;
+
+struct Rectangle
+{
+    int height;
+    int width;
+};
+
+struct ListNode
+
+{
+    Rectangle rect;
+    ListNode *next = nullptr;
+    ListNode(int h, int w)
+    {
+        rect.height = h;
+        rect.width = w;
+    };
+};
+
+void display(ListNode* head)
+{
+    
+    if(head == nullptr)
+    {
+        cout << "The list is empty." << endl;
+    }
+    else if (head != nullptr && head->next == nullptr)
+    {
+        cout << "(" << head->rect.height << ", " << head->rect.width << ")" << endl;
+    }
+    else
+    {
+        ListNode * Node = head;
+        while(Node != nullptr)
+        {
+            cout << "(" << Node->rect.height << ", " << Node->rect.width << ")->";
+            Node = Node->next;
+        }
+        cout << "@" << endl;
+    }
+    
+    
+}
+
+void sortLL(ListNode* head)
+{
+    bool unsorted = true;
+    
+    while(unsorted) {
+        
+        unsorted = false;
+        
+        ListNode *cur = head;
+        
+        while(cur != nullptr) {
+            
+            ListNode *next = cur->next;
+            
+            if(next!= NULL && ((next->rect.height)*(next->rect.width)) < (cur->rect.height)*(cur->rect.width) ) {
+                
+                Rectangle temp = cur->rect;
+                
+                cur->rect = next->rect;
+                
+                next->rect = temp;
+                
+                unsorted = true;
+                
+            }
+            
+            cur = cur->next;
+            
+        }
+        
+    }
+    
+}
+
+void removeDuplicates(ListNode* head)
+{
+    ListNode *cur = head;
+    ListNode *temp;
+    while(cur->next != NULL)
+    {
+        if(cur->rect.height == cur->next->rect.height && cur->rect.width == cur->next->rect.width)
+        {
+            temp = cur->next->next;
+            cur->next = temp;
+        }
+        else
+        {
+            cur = cur->next;
+        }
+    }
+}
+
+void reverseLL(ListNode *&head)
+{
+    ListNode *prev = nullptr;
+    ListNode *next = nullptr;
+    ListNode *cur = head;
+    
+    while(cur != NULL)
+    {
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    
+    head = prev;
+}
+
+int main()
+{
+    ListNode * head = nullptr;
+    
+    /// Display "The list is empty."
+    
+    display(head);
+    
+    
+    sortLL(head);
+    
+    /// Display "The list is empty."
+    display(head);
+    
+    ListNode node1(8, 9);
+    head = &node1;
+    sortLL(head);
+    /// Display the height and width of the node"
+    display(head);
+    
+    
+    ListNode node2(8, 2);
+    ListNode node3(2, 4);
+    ListNode node4(8, 9);
+    ListNode node5(2, 4);
+    ListNode node6(1, 4);
+    ListNode node7(8, 9);
+    
+    node1.next = &node2;
+    node2.next = &node3;
+    node3.next = &node4;
+    node4.next = &node5;
+    node5.next = &node6;
+    node6.next = &node7;
+    
+    /// Display the list like
+    /// (8, 9)->(8, 2)->(2, 4)(8, 9)->(2, 4)->(1, 4)->(8, 9)->@
+    display(head);
+    
+    cout << "Sort the list" << endl;
+    
+    sortLL(head);
+    /// Display the list like
+    /// (1, 4)->(2, 4)->(2, 4)->(8, 2)->(8, 9)->(8, 9)->(8, 9)->@
+    display(head);
+    
+    cout << "Remove the duplicated items" << endl;
+    
+    removeDuplicates(head);
+    display(head);
+    
+    cout << "Reverse the list" << endl;
+    
+    reverseLL(head);
+    
+    display(head);
+    
+    return 0;
+}
