@@ -1,0 +1,132 @@
+#include <iostream>
+
+using namespace std;
+
+struct ListNode {
+    
+    int data;
+    ListNode *next;
+    
+    ListNode(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+class LinkedList {
+    
+private:
+    
+    ListNode *head = NULL;
+    
+    ListNode *tail = NULL;
+    
+public:
+    
+    void addNode(int x)
+    
+    {
+        ListNode *newNode = new ListNode(x);
+        if(head==NULL){
+            head = newNode;
+            tail = head;
+        }
+        tail->next = newNode;
+        tail=newNode;
+        
+    }
+    
+    void addNodeToSortedList(int x)
+    {
+        ListNode *newNode = new ListNode(x);
+        if(head==NULL){
+            head = newNode;
+            tail=head;
+            return;
+        }
+        if(head->data>x){
+            newNode->next = head;
+            head = newNode;
+            return;
+        }
+        ListNode *newnode=head;
+        ListNode *temp = head->next;
+        
+        while(newnode != NULL && newnode->data<x){
+            newnode=newnode->next;
+        }
+        
+        if(head->next == tail)
+        tail=newNode;
+        
+        temp->next=newNode;
+        //newNode->next=newnode;
+        
+    }
+    
+    void deleteAll()
+    
+    {
+        ListNode *temp = head;
+        ListNode *node2 = head->next;
+        while (temp != NULL)
+        {
+            node2 = temp->next;
+            delete temp;
+            temp = node2;
+        }
+        head=NULL;
+        tail=NULL;
+    }
+    
+    void display()
+    
+    {
+        ListNode*temp = head;
+        while(temp){
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl<<endl;
+        
+    }
+    
+};
+
+int main()
+
+{
+    
+    LinkedList ll;
+    
+    ll.addNode(6);
+    
+    ll.addNode(2);
+    
+    ll.addNode(28);
+    
+    ll.addNode(1);
+    
+    /// Display 6 -> 2 -> 28 -> 1 -> @
+    
+    ll.display();
+    
+    ll.deleteAll();
+    
+    ll.addNodeToSortedList(6);
+    
+    ll.addNodeToSortedList(2);
+    
+    ll.addNodeToSortedList(28);
+    
+    ll.addNodeToSortedList(1);
+    
+    /// Display 1 -> 2 -> 6 ->28 -> @
+    
+    ll.display();
+    
+    ll.deleteAll();
+    
+    return 0;
+    
+}
