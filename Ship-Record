@@ -1,0 +1,150 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <array>
+using namespace std;
+
+struct ShipRecord {
+	int serialNum;
+	int shipType;
+	string name;
+	int year;
+	int cap;
+	ShipRecord* next = nullptr;
+	ShipRecord(int sNum, int sType, string name, int year, int cap)
+		: serialNum(sNum), shipType(sType), name(name), year(year), cap(cap) {}
+	ShipRecord() {}
+};
+
+const int SIZE = 10, LINE_SIZE = 5;
+class HashMgr {
+ShipRecord * hashTable[SIZE] = { nullptr };
+private:
+	void deleteIndex(int index) {
+		ShipRecord *curr = hashTable[index], *next;
+		while (curr != nullptr) {
+			next = curr->next;
+			delete curr;
+			curr = next;
+		}
+	}
+	void displayIndex(int index, bool checkSerial, int serial) {
+		ShipRecord* temp = hashTable[index];
+		if (temp != nullptr) {
+			cout << "Bucket#" << index << endl;
+			while (temp != nullptr) {
+				if (!checkSerial || temp->serialNum == serial)cout << "    " << temp->serialNum << " " << temp->shipType << " " << temp->name << " " << temp->year << " " << temp->cap << endl;
+				temp = temp->next;
+			}
+		} else if (checkSerial) {
+			cout << "No records exist for serial#" << serial << endl;
+		}
+	}
+public:
+	HashMgr() {
+		string line;
+		ifstream myfile;
+		myfile.open("shipRecords.txt");
+		if (myfile.is_open()) {
+			while (!myfile.eof()) {
+				getline(myfile, line);
+				addInfo(line);
+			}
+			myfile.close();
+		}
+	}
+	~HashMgr() {
+		for (int i = 0; i < SIZE; i++) deleteIndex(i);
+	}
+	array<string, LINE_SIZE> parseString(string str) {
+		array<string, LINE_SIZE> data;
+		char delimiter = '\"';
+		bool delimStart = false;
+		istringstream ss(str);
+		string delimWord = "";
+		int i = 0;
+		do {
+			string word;
+			ss >> word;
+			if (word[0] == delimiter) delimStart = true;
+			if (!word.empty()) {
+				if (word.back() == delimiter) delimStart = false;
+				if (word[0] != delimiter || word.length() != 1) {
+					if (!delimStart) {
+						if (delimWord.empty()) {
+							data[i] = word;
+						}
+						else {
+							delimWord += word;
+							data[i] = delimWord;
+							delimWord = "";
+						}
+						i++;
+					}
+					else {
+						delimWord += word + " ";
+					}
+				}
+			}
+		} while (ss);
+		return data;
+	}
+	void addInfo(string line) {
+		array<string, LINE_SIZE> data = parseString(line);
+		int key = stoi(data[0]) % 10;
+		ShipRecord* rec = new ShipRecord(stoi(data[0]), stoi(data[1]), data[2], stoi(data[3]), stoi(data[4]));
+		if (hashTable[key] == nullptr) {
+			hashTable[key] = rec;
+			return;
+		}
+		else {
+			ShipRecord* temp = hashTable[key];
+			while (temp->next != nullptr) temp = temp->next;
+			temp->next = rec;
+		}
+	}
+	void displayOne(int serialNum) {
+		const int key = serialNum % 10;
+		displayIndex(key, true, serialNum);
+	}
+	void displayAll() {
+		for (int i = 0; i < SIZE; i++) displayIndex(i, false, NULL);
+	}
+	void deleteOne(int serialNum) {
+		int i = serialNum % 10;
+		ShipRecord* curr = hashTable[i];
+		while (curr != nullptr && curr->serialNum != serialNum) {
+			curr = curr->next;
+		}
+		if (hashTable[i] == curr) {
+			if (hashTable[i]->next == nullptr) {
+				delete hashTable[i];
+				return;
+			}
+			*hashTable[i] = *(hashTable[i]->next);
+			return;
+		}
+		ShipRecord* prev = hashTable[i];
+		while (prev->next != nullptr && prev->next != curr) prev = prev->next;
+		prev->next = prev->next->next;
+		delete curr;
+	}
+};
+int main()
+{
+	HashMgr hm = HashMgr();
+	hm.displayAll();
+	hm.displayOne(1009);
+	hm.displayOne(1010);
+	hm.displayOne(1019);
+	hm.displayOne(1029);
+	hm.displayOne(1039);
+	hm.displayOne(1014);
+	hm.displayOne(1008); /// Prompt a message to that the record does not exist
+	hm.deleteOne(1009);
+	hm.deleteOne(1039);
+	hm.displayAll();
+	return 0;
+}
