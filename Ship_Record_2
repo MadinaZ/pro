@@ -1,0 +1,236 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+struct ShipRecord
+{
+    int serialNum;
+    int shipType;
+    string name;
+    int year;
+    int cap;
+
+    ShipRecord *next = nullptr;
+};
+
+const int SIZE = 10;
+
+class HashMgr
+{
+    ShipRecord *hashTable[SIZE] = {nullptr};
+
+public:
+
+    HashMgr()
+    {
+        string line;
+        ifstream myfile;
+        myfile.open("shipRecords.txt");
+        if(myfile.is_open())
+        {
+            while (!myfile.eof())
+            {
+                getline (myfile, line);
+                addInfo(line);
+            }
+            myfile.close();
+        }
+    }
+
+    ~HashMgr()
+    {
+        ShipRecord *nextNode;
+        ShipRecord *node;
+
+        for (int i = 0; i < SIZE; i++)
+        {
+            node = hashTable[i];
+
+            while (node != nullptr)
+            {
+                nextNode = node->next;
+                delete node;
+                node = nextNode;
+            }
+        }
+    }
+
+    void removeLeadingBlanks(string &line)
+    {
+        if (line[0] == ' ')
+        {
+            while (line[0] == ' ')
+            {
+                line = line.substr(1);
+            }
+        }
+        return;
+    }
+
+    void addInfo(string line)
+    {
+        ShipRecord *temp = new ShipRecord;
+        vector <string> v;
+
+        while (line[0] != '\0')
+        {
+            removeLeadingBlanks(line);
+
+            if(line[0] == '"')
+            {
+                int position = line.substr(1).find('"');
+                v.push_back(line.substr(0, position+2));
+                line.erase(0, position+2);
+            }
+
+            else
+            {
+                int position = line.find(' ');
+                v.push_back(line.substr(0, position));
+                line.erase(0, position);
+            }
+        }
+
+
+        temp->serialNum = atoi(v[0].c_str());
+        temp->shipType = atoi(v[1].c_str());
+        temp->name = v[2];
+        temp->year = atoi(v[3].c_str());
+        temp->cap = atoi(v[4].c_str());
+
+        int sindex = temp->serialNum % SIZE;
+
+        ShipRecord *node = hashTable[sindex];
+
+        if (node == nullptr)
+        {
+            hashTable[sindex] = temp;
+        }
+
+        else
+        {
+            while (node->next != nullptr)
+            {
+                node = node->next;
+            }
+
+            node->next = temp;
+        }
+    }
+
+    void displayOne(int serialNum)
+    {
+        int index = serialNum % SIZE;
+        ShipRecord *node = hashTable[index];
+
+        if (node == nullptr)
+        {
+            cout << "There does not exists a record with the serial number: " << serialNum << endl << endl;
+            return;
+        }
+
+        else
+        {
+            while (node != nullptr)
+            {
+                if (node->serialNum == serialNum)
+                {
+                    cout << "Serial Number: " << node->serialNum << endl;
+                    cout << "Ship Type: " << node->shipType << endl;
+                    cout << "Ship Name: " << node->name << endl;
+                    cout << "Year: " << node->year << endl;
+                    cout << "Capacity: " << node->cap << endl << endl;
+
+                    return;
+                }
+
+                node = node->next;
+            }
+        }
+    }
+
+    void displayAll()
+    {
+        ShipRecord *node;
+
+        for (int i = 0; i < SIZE; i++)
+        {
+            node = hashTable[i];
+
+            while (node != nullptr)
+            {
+                cout << "Serial Number: " << node->serialNum << endl;
+                cout << "Ship Type: " << node->shipType << endl;
+                cout << "Ship Name: " << node->name << endl;
+                cout << "Year: " << node->year << endl;
+                cout << "Capacity: " << node->cap << endl << endl;
+                node = node->next;
+            }
+        }
+    }
+
+    void deleteOne(int serialNum)
+    {
+        int index = serialNum % SIZE;
+
+        ShipRecord *previous = nullptr;
+        ShipRecord *node = hashTable[index];
+
+        if (node == nullptr)
+        {
+            cout << "The node does not exist\n" << endl;
+            return;
+        }
+
+        else
+        {
+            while (node != nullptr)
+            {
+                if (node->serialNum == serialNum)
+                {
+                    if (previous == nullptr)
+                    {
+                        hashTable[index] = node->next;
+                    }
+
+                    else
+                    {
+                        previous->next = node->next;
+                    }
+
+                    delete node;
+                    return;
+                }
+
+                previous = node;
+                node = node->next;
+            }
+        }
+
+        return;
+    }
+};
+
+int main()
+{
+    HashMgr hm;
+
+    hm.displayAll();
+
+    hm.displayOne(1009);
+    hm.displayOne(1010);
+    hm.displayOne(1019);
+    hm.displayOne(1029);
+    hm.displayOne(1039);
+    hm.displayOne(1014);
+    hm.displayOne(1008); /// Prompt a message to that the record does not exist
+
+    hm.deleteOne(1009);
+    hm.deleteOne(1039);
+
+    hm.displayAll();
+
+    return 0;
+}
