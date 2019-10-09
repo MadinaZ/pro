@@ -1,10 +1,9 @@
 //
 //  DynamicArray.h
-//  Assignment-3-part-1
+//  lab_5.1
 //
-//  Created by Madina on 9/18/19.
+//  Created by Madina on 9/25/19.
 //  Copyright © 2019 Madina. All rights reserved.
-//
 
 #ifndef DynamicArray_h
 #define DynamicArray_h
@@ -22,7 +21,7 @@ public:
     DynamicArray<T>& operator = (const DynamicArray<T>&);
     int capacity() const;
     void capacity(int);
-    T operator[ ] (int) const;
+    const T&operator[ ] (int) const;
     T& operator[ ] (int);
 };
 
@@ -75,7 +74,7 @@ void DynamicArray<T>:: capacity(int cap)
     T* temp = new T[cap];
     for(int i = 0; i < this->cap; i++)
         temp[i] = value[i];
-
+    
     for(int i = this->cap; i < cap; i++)
         temp[i] = T();
     delete [ ] value;
@@ -84,7 +83,7 @@ void DynamicArray<T>:: capacity(int cap)
 }
 
 template<typename T>
-T DynamicArray<T>::operator[](int index) const
+const T& DynamicArray<T>::operator[](int index) const
 {
     if(index < 0)
         return dummy;
@@ -101,7 +100,7 @@ T& DynamicArray<T>:: operator[ ] (int index)
         return dummy;
     if(index >= cap)
         capacity(index*2);
-    return value[index];
+        return value[index];
 }
 
 #endif /* DynamicArray_h */
