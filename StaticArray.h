@@ -6,9 +6,7 @@
 //  Copyright © 2019 Madina. All rights reserved.
 //
 
-#ifndef StaticArray_h//we use this to protect it
-//and do not allow to copy its content twice to main.cpp file
-
+#ifndef StaticArray_h
 #define StaticArray_h
 template<typename V, int CAP>
 class StaticArray
@@ -18,7 +16,7 @@ class StaticArray
 public:
     StaticArray();
     int capacity() const;
-    const V& operator[](int) const;
+    V operator[](int) const;
     V& operator[](int);
 };
 
@@ -29,17 +27,19 @@ StaticArray<V,CAP>::StaticArray()
         values[i] = V();
 }
 template<typename V, int CAP>
-const V& StaticArray<V,CAP>::operator[](int index) const
+V StaticArray<V,CAP>::operator[](int index) const
 {
-    if(index < 0 || index >= CAP)
-        return dummy;
+    if(index < 0)
+        return V();
+    if(index >= CAP)
+        return V();
     else
         return values[index];
 }
 template<typename V, int CAP>
 V& StaticArray<V, CAP>::operator[](int index)
 {
-    if(index < 0 || index >= CAP)
+    if(index < 0 || index > CAP || index == CAP)
         return dummy;
     return values[index];
 }
@@ -47,10 +47,11 @@ template<typename V, int CAP>
 int StaticArray<V, CAP>:: capacity() const
 {
 //    int length = sizeof(values)/sizeof(V);
-//    assert(length == 100);
+//    assert(length == CAP);
 //    return length;
     return CAP;
 }
 #endif /* Array_h */
+
 
 
