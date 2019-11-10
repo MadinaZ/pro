@@ -21,7 +21,7 @@ public:
     DynamicArray<T>& operator = (const DynamicArray<T>&);
     int capacity() const;
     void capacity(int);
-    const T&operator[ ] (int) const;
+    T operator[ ] (int) const;
     T& operator[ ] (int);
 };
 
@@ -83,7 +83,7 @@ void DynamicArray<T>:: capacity(int cap)
 }
 
 template<typename T>
-const T& DynamicArray<T>::operator[](int index) const
+T DynamicArray<T>::operator[](int index) const
 {
     if(index < 0)
         return dummy;
