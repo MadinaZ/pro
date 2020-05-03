@@ -1,74 +1,58 @@
-//
-//  Queue.h
-//  Lab-6-2
-//
-//  Created by Madina Sadirmekova on 10/14/19.
-//  Copyright © 2019 Madina Sadirmekova. All rights reserved.
-//
-#ifndef Queue_h
-#define Queue_h
+//Programming name : Kamaluddin Shamsi
+//Programming ID : 1626888
 
-template<typename V>
-class Queue
-{
-    struct Node
-    {
-        V value;
+#ifndef QUEUE_H
+#define QUEUE_H
+
+template <typename T>
+class Queue{
+    struct Node{
+        T value;
         Node* next;
     };
-    
+
     Node* firstNode;
     Node* lastNode;
-    int siz;
-    V dummy = V();
-    
+    int siz = 0;
+
 public:
     Queue();
-    Queue(const Queue<V>&); //copy constructor
-    Queue<V>& operator = (const Queue<V>&);
+    Queue(const Queue<T>&); //Copy constructor
     ~Queue();
-    void push(const V&);
-    const V& front() const;
-    const V& back() const;
-    
+    Queue<T>& operator = (const Queue<T>&);
+    void push(const T&);
+    const T& front() const;
+    const T& back() const;
     void pop();
-    void clear();
     int size() const;
     bool empty() const;
+    void clear();
 };
 
-template<typename V>
-Queue<V>::Queue()
-{
+template <typename T>
+Queue<T>::Queue(){
     firstNode = 0;
     lastNode = 0;
-    siz = 0;
-};
+}
 
-template<typename V>
-Queue<V>::Queue(const Queue<V>& original)//copy
-{
-    this->firstNode = 0;
-    this->lastNode = 0;
+template <typename T>
+Queue<T>::Queue(const Queue<T>& original){
+    firstNode = 0;
+    lastNode = 0;
     siz = original.siz;
-    for(Node* p = original.firstNode; p; p = p->next)
-    {
-        Node* temp = new Node{p->value,0};
-//        temp->value = p->value;
-//        temp->next = 0;
-        if(lastNode)
-            lastNode->next = temp;
-        else
-            firstNode = temp;
+    for(Node* p = original.firstNode; p; p = p->next){
+        Node* temp = new Node;
+        temp->value = p->value;
+        temp->next = 0;
+        if(lastNode) lastNode->next = temp;
+        else firstNode = temp;
         lastNode = temp;
     }
 }
 
-template<typename V>
-Queue<V>::~Queue()
-{
-    while(firstNode)
-    {
+template <typename T>
+Queue<T>::~Queue(){
+    while(firstNode){
         Node* p = firstNode;
         firstNode = firstNode->next;
         delete p;
@@ -76,105 +60,89 @@ Queue<V>::~Queue()
     }
 }
 
-template<typename V>
-Queue<V>& Queue<V>::operator=(const Queue<V>& original)//assign
-{
-    if(this != &original)
-    {
-        while(firstNode)
-        {
-            Node *p = firstNode;
+//Assignment Operator
+template <typename T>
+Queue<T>& Queue<T>::operator = (const Queue<T>& original){
+    if(this != &original){
+        //deallocate existing list
+        while(firstNode){
+            Node* p = firstNode;
             firstNode = firstNode->next;
             delete p;
         }
-        
-        this->lastNode = 0;
-        for(Node* p = original.firstNode; p; p = p->next)
-        {
-            Node* temp = new Node{p->value,0};
-//            temp->value = p->value;
-//            temp->next = 0;
-            if(lastNode)
-                lastNode->next = temp;
-            else
-                firstNode = temp;
+
+        //build new queue
+        lastNode = 0; //Temporary tail
+        for(Node* p = original.firstNode; p; p = p->next){
+            Node* temp = new Node;
+            temp->value = p->value;
+            temp->next = 0;
+            if(lastNode) lastNode->next = temp;
+            else firstNode = temp;
             lastNode = temp;
         }
         siz = original.siz;
     }
-    return *this; //to match the data type
+    return *this;
 }
 
-template<typename V>
-void Queue<V>::push(const V& value)
-{
-    Node* temp = new Node{value,0};
-    if(lastNode)//whenever my lastNode points to somehwere
-        lastNode->next = temp;
-    else
-        firstNode = temp;
+template <typename T>
+void Queue<T>::push(const T& value){
+    Node* temp = new Node;
+    temp->value = value;
+    temp->next = 0;
+    if (lastNode) lastNode->next = temp;
+    else firstNode = temp;
     lastNode = temp;
-    ++siz;
+    siz++;
 }
 
-template<typename V>
-const V& Queue<V>::front() const
-{
-    if(firstNode)
-        return firstNode->value;
-    else
-        return dummy;
+//Get the value of the first node
+template <typename T>
+const T& Queue<T>::front() const{
+    if(firstNode == 0) return T();
+    return firstNode->value;
 }
 
-template<typename V>
-const V& Queue<V>::back() const
-{
-    if(lastNode)
-        return lastNode->value;
-    return dummy;
+//Get the value of the last node
+template <typename T>
+const T& Queue<T>::back() const{
+    if(firstNode == 0) return T();
+    return lastNode->value;
 }
 
-template<typename V>
-void Queue<V>::pop()
-{
-    if(firstNode)
-    {
+template <typename T>
+void Queue<T>::pop(){
+    if (firstNode){
         Node* p = firstNode;
         firstNode = firstNode->next;
         delete p;
         siz--;
     }
-    if (siz == 0) lastNode = 0;
-}
-
-template<typename V>
-void Queue<V>::clear()
-{
-    while(firstNode)
-    {
-        Node* p = firstNode;
-        firstNode = firstNode->next; //or firstNode = p->next
-        delete p;
-        --siz;
-    }
-    
-    if(siz == 0)
+    if (size() == 0)
         lastNode = 0;
 }
 
-template<typename V>
-int Queue<V>:: size() const
-{
+template <typename T>
+int Queue<T>::size() const{
     return siz;
 }
 
-template<typename V>
-bool Queue<V>:: empty() const
-{
-    if(siz == 0)
-        return true;
-    else
-        return false;
+template <typename T>
+bool Queue<T>::empty() const{
+    if(firstNode == 0) return true;
+    else return false;
 }
 
-#endif /* Queue_h */
+template <typename T>
+void Queue<T>::clear(){
+    while(firstNode){
+        Node* p = firstNode;
+        firstNode = firstNode->next;
+        delete p;
+        siz--;
+    }
+    lastNode = 0;
+}
+
+#endif
