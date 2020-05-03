@@ -16,13 +16,13 @@ class DynamicArray
     T dummy = T();
 public:
     DynamicArray(int = 2);
-    DynamicArray(const DynamicArray<T>&);
+    DynamicArray(const DynamicArray<T>&); //copy constructor
     ~DynamicArray(){delete [ ] value;}
     DynamicArray<T>& operator = (const DynamicArray<T>&);
     int capacity() const;
     void capacity(int);
-    T operator[ ] (int) const;
-    T& operator[ ] (int);
+    T operator[ ] (int) const; //getter
+    T& operator[ ] (int); //setter
 };
 
 template<typename T>
